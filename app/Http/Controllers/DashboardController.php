@@ -25,4 +25,11 @@ class DashboardController extends Controller
     public function detail($harga) {
         return view('detail', ['harga' => $harga]);
     }
+    
+    // Halaman Home Versi Data (jika ingin dipertahankan sebagai fungsi berbeda/tambahan)
+    public function homeDashboard() {
+        $data['judul'] = 'Laman Home'; 
+        $data['isi'] = 'Lorem ipsum dolor sit amet'; 
+        return view('dashboard', $data);
+    } 
 }
