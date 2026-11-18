@@ -30,3 +30,6 @@ Route::get('/kalkulator/segitiga', [KalkulatorController::class, 'segitiga']);
 
 // Route untuk memproses hasil perhitungan segitiga
 Route::post('/kalkulator/segitiga/proses', [KalkulatorController::class, 'hitungSegitiga']);
+
+//route ke controller Dashboard 
+Route::get('/dashboard',[DashboardController::class, 'home']); 
