@@ -32,4 +32,4 @@ Route::get('/kalkulator/segitiga', [KalkulatorController::class, 'segitiga']);
 Route::post('/kalkulator/segitiga/proses', [KalkulatorController::class, 'hitungSegitiga']);
 
 //route ke controller Dashboard 
-Route::get('/dashboard',[DashboardController::class, 'home']); 
+Route::get('/dashboard', [DashboardController::class, 'adminDashboard']);
