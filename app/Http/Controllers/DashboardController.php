@@ -39,5 +39,5 @@ class DashboardController extends Controller
     public function detail($harga) {
         return view('detail', ['harga' => $harga]);
     }
-    
+
 }
