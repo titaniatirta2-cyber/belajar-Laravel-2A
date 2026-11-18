@@ -6,9 +6,18 @@ use Illuminate\Http\Request;
 
 class DashboardController extends Controller
 {
-    // Halaman Home
+    // Halaman Home / Dashboard
     public function home() {
-        return view('home');
+        $data['judul'] = 'Laman Home'; 
+        $data['isi'] = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.'; 
+        return view('dashboard', $data);
+    }
+
+    // Tambahkan method ini agar errornya hilang
+    public function adminDashboard() {
+        $data['judul'] = 'Laman Dashboard Admin'; 
+        $data['isi'] = 'Selamat datang di halaman dashboard utama.'; 
+        return view('dashboard', $data);
     }
 
     // Halaman Product
@@ -25,11 +34,4 @@ class DashboardController extends Controller
     public function detail($harga) {
         return view('detail', ['harga' => $harga]);
     }
-    
-    // Halaman Home Versi Data (jika ingin dipertahankan sebagai fungsi berbeda/tambahan)
-    public function homeDashboard() {
-        $data['judul'] = 'Laman Home'; 
-        $data['isi'] = 'Lorem ipsum dolor sit amet'; 
-        return view('dashboard', $data);
-    } 
 }
