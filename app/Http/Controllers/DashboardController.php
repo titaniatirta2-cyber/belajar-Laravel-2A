@@ -10,8 +10,13 @@ class DashboardController extends Controller
     public function home() {
         $data['judul'] = 'Laman Home'; 
         $data['isi'] = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.'; 
-        return view('dashboard', $data);
+        return view('home', $data);
     }
+
+   public function gallery() {
+    $data['judul'] = 'Laman Gallery';
+    return view('gallery', $data);
+}
 
     // Tambahkan method ini agar errornya hilang
     public function adminDashboard() {
@@ -34,4 +39,6 @@ class DashboardController extends Controller
     public function detail($harga) {
         return view('detail', ['harga' => $harga]);
     }
+
+
 }

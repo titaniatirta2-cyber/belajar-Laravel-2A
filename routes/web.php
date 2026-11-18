@@ -33,3 +33,5 @@ Route::post('/kalkulator/segitiga/proses', [KalkulatorController::class, 'hitung
 
 //route ke controller Dashboard 
 Route::get('/dashboard', [DashboardController::class, 'adminDashboard']);
+
+Route::get('/gallery', [DashboardController::class, 'gallery']);
