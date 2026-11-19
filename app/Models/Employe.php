@@ -10,8 +10,9 @@ class Employe extends Model
     protected $table = 'employes';
     
     //definiskan primary key jika fieldnya bukan id 
-    protected $primaryKey = 'id'; 
+    protected $primaryKey = 'id';
     
     //jika primary ke bukan integer semisal string 
     protected $keyType = 'integer';
+    
 }
