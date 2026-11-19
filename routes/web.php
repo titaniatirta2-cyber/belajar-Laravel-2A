@@ -5,6 +5,7 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\Web;
 use App\Http\Controllers\MahasiswaController;
 use App\Http\Controllers\KalkulatorController;
+use App\Http\Controllers\EmployeController; 
 
 // Route Utama & Dashboard (Olshop)
 Route::get('/', [DashboardController::class, 'home']);
@@ -36,3 +37,6 @@ Route::get('/dashboard', [DashboardController::class, 'adminDashboard']);
 
 //route ke controller Dashboard untuk menampilkan halaman gallery
 Route::get('/gallery', [DashboardController::class, 'gallery']);
+
+//route ke controller Dashboard untuk menampilkan halaman contact
+Route::get('/employe',[EmployeController::class, 'index']);
