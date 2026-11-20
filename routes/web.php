@@ -6,6 +6,7 @@ use App\Http\Controllers\Web;
 use App\Http\Controllers\MahasiswaController;
 use App\Http\Controllers\KalkulatorController;
 use App\Http\Controllers\EmployeController; 
+use App\Http\Controllers\AdminController;
 
 // Route Utama & Dashboard (Olshop)
 Route::get('/', [DashboardController::class, 'home']);
@@ -50,3 +51,10 @@ Route::put('/employe/{employe}',[EmployeController::class, 'update']);
 Route::delete('/employe/{employe}',[EmployeController::class, 'destroy']); 
 
 Route::resource('employe',EmployeController::class);
+
+Route::get('/admin', [AdminController::class, 'index']);
+Route::get('/admin/create', [AdminController::class, 'create']);
+Route::post('/admin/store', [AdminController::class, 'store']);
+Route::get('/admin/{id}/edit', [AdminController::class, 'edit']);
+Route::post('/admin/{id}/update', [AdminController::class, 'update']);
+Route::post('/admin/{id}/delete', [AdminController::class, 'destroy']);

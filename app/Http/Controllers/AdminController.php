@@ -7,59 +7,57 @@ use Illuminate\Http\Request;
 
 class AdminController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index()
     {
-        //
+        $data['judul'] = 'CRUD Data Admin';
+        $data['admins'] = Admin::all();
+
+        return view('admin.tampil_admin', $data);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
     public function create()
     {
-        //
+        $data['judul'] = 'Tambah Data Admin';
+
+        return view('admin.tambah_admin', $data);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(Request $request)
     {
-        //
+        $admin = new Admin;
+        $admin->id_admin = $request->id_admin;
+        $admin->username = $request->username;
+        $admin->password = $request->password;
+        $admin->save();
+
+        return redirect('/admin');
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(Admin $admin)
+    public function edit($id)
     {
-        //
+        $data['judul'] = 'Edit Data Admin';
+        $data['admin'] = Admin::findOrFail($id);
+
+        return view('admin.edit_admin', $data);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Admin $admin)
+    public function update(Request $request, $id)
     {
-        //
+        $admin = Admin::findOrFail($id);
+        $admin->username = $request->username;
+        if ($request->filled('password')) {
+            $admin->password = $request->password;
+        }
+        $admin->save();
+
+        return redirect('/admin');
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, Admin $admin)
+    public function destroy($id)
     {
-        //
-    }
+        $admin = Admin::findOrFail($id);
+        $admin->delete();
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(Admin $admin)
-    {
-        //
+        return redirect('/admin');
     }
 }
