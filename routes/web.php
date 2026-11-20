@@ -58,3 +58,6 @@ Route::post('/admin/store', [AdminController::class, 'store']);
 Route::get('/admin/{id}/edit', [AdminController::class, 'edit']);
 Route::post('/admin/{id}/update', [AdminController::class, 'update']);
 Route::post('/admin/{id}/delete', [AdminController::class, 'destroy']);
+
+Route::get('/', function(){ 
+    return view('login'); }); 
