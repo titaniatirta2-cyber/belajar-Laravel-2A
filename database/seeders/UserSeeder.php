@@ -18,7 +18,7 @@ class UserSeeder extends Seeder
     //sisipkan data di table users 
     DB::table('users')->insert([ 
         'nama' => 'Titania Tirta', 
-        'email' => 'titaniatirta@mail.com', 
+        'email' => 'titaniatirta2@gmail.com', 
         'password' => Hash::make('123456'), 
         'foto' => '', 
         'role' => 'admin', 

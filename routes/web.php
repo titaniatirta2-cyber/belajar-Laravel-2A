@@ -7,9 +7,10 @@ use App\Http\Controllers\MahasiswaController;
 use App\Http\Controllers\KalkulatorController;
 use App\Http\Controllers\EmployeController; 
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\AuthController; 
 
 // Route Utama & Dashboard (Olshop)
-Route::get('/', [DashboardController::class, 'home']);
+// Route::get('/', [DashboardController::class, 'home']);
 Route::get('/home', [DashboardController::class, 'home']);
 Route::get('/product', [DashboardController::class, 'product']);
 Route::get('/produk/detail/{harga}', [DashboardController::class, 'detail']);
@@ -59,5 +60,16 @@ Route::get('/admin/{id}/edit', [AdminController::class, 'edit']);
 Route::post('/admin/{id}/update', [AdminController::class, 'update']);
 Route::post('/admin/{id}/delete', [AdminController::class, 'destroy']);
 
-Route::get('/', function(){ 
-    return view('login'); }); 
+Route::get('/', function () {
+    return view('login');
+});
+
+Route::get('/login', function () {
+    return view('login');
+});
+
+Route::post('/login',[AuthController::class, 'cek']);
+
+Route::get('/dashboard', function () {
+    return view('dashboard'); // atau arahkan ke DashboardController kamu
+});
