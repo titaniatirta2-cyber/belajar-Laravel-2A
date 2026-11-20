@@ -27,6 +27,14 @@
             <button>Edit</button> | <button>Delete</button>
         </td>
     </tr>
+
+    <form method="post" action="/employe/{{$row->id}}" style="display: inline-block;"> 
+        @method('delete')
+         @csrf 
+         <button>
+             Delete 
+            </button> 
+        </form>
     @endforeach
 </table>
 @endsection
