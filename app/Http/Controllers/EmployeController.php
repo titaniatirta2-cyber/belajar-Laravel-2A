@@ -34,6 +34,5 @@ class EmployeController extends Controller
          $employe->save();     
          
          //jika berhasil kembali ke tampil data   
-         return redirect('/employe'); 
-         } 
+         return redirect('/employe'); } 
 }
