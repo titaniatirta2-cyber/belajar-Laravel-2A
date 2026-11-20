@@ -4,6 +4,7 @@
 <h1>{{ $judul }}</h1>
 
 <a href="/employe/create">Tambah Data Pegawai</a>
+<a href="/employe/edit/{{$row->id}}"><button>Edit</button></a>
 <br><br>
 
 <table border="1" align="center">
