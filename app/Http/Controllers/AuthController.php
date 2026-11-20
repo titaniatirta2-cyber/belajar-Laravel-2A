@@ -3,42 +3,49 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\User;
-use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Auth;
 
 class AuthController extends Controller
 {
-    public function cek(Request $request)
+    public function showLogin()
     {
-        $request->validate([
+        if (Auth::guard('admin')->check()) {
+            return redirect('/students');
+        }
+
+        return view('auth.login');
+    }
+
+    public function login(Request $request)
+    {
+        $credentials = $request->validate([
             'email' => ['required', 'email'],
-            'password' => ['required'],
+            'password' => ['required', 'string'],
         ]);
 
-        // Pakai first() agar kalau tidak ketemu tidak langsung 404
-        $data = User::where('email', $request->email)->first();
+        if (Auth::guard('admin')->attempt($credentials, $request->boolean('remember'))) {
+            $request->session()->regenerate();
 
-        $passwordValid = false;
-
-        if ($data) {
-            if (str_starts_with($data->password, '$2y$') || str_starts_with($data->password, '$2a$')) {
-                $passwordValid = Hash::check($request->password, $data->password);
-            } else {
-                $passwordValid = hash_equals((string) $data->password, (string) $request->password);
-            }
+            return redirect()->intended('/students')->with('success', 'Berhasil login sebagai admin.');
         }
 
-        if ($data && $passwordValid) {
-            session([
-                'email' => $data->email,
-                'nama' => $data->nama,
-                'role' => $data->role,
-                'logged_in' => true,
-            ]);
-
-            return redirect('/dashboard');
-        }
-
-        return redirect('/login')->with('error', 'Email atau password salah.');
+        return back()->withInput($request->only('email'))->withErrors([
+            'email' => 'Email atau password admin tidak sesuai.',
+        ]);
     }
+
+    public function logout(Request $request)
+    {
+        Auth::guard('admin')->logout();
+
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
+
+        return redirect('/login')->with('success', 'Anda telah logout.');
+    }
+
+    public function cek(Request $request)
+{
+    return $this->login($request);
+}
 }

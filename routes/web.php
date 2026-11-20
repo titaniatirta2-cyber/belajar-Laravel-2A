@@ -8,6 +8,7 @@ use App\Http\Controllers\KalkulatorController;
 use App\Http\Controllers\EmployeController; 
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AuthController; 
+use App\Http\Controllers\StudentController;
 
 // Route Utama & Dashboard (Olshop)
 // Route::get('/', [DashboardController::class, 'home']);
@@ -75,3 +76,25 @@ Route::post('/login',[AuthController::class, 'cek']);
 // });
 
 Route::get('/dashboard', [DashboardController::class, 'adminDashboard']);
+
+Route::get('/logout',[AuthController::class, 'logout']);
+
+Route::group(['middleware' => 'islogin'], function(){     
+Route::get('/dashboard',[DashboardController::class, 'home']);     
+Route::get('/gallery',[DashboardController::class, 'gallery']);     
+Route::get('/employe',[EmployeController::class, 'index']);     
+Route::get('/employe/create',[EmployeController::class, 'create']);     
+Route::post('/employe/store',[EmployeController::class, 'store']);     
+Route::get('/employe/edit/{employe}',[EmployeController::class, 'show']);     
+Route::put('/employe/{employe}',[EmployeController::class, 'update']);     
+Route::delete('/employe/{employe}',[EmployeController::class, 'destroy']);     
+Route::get('/logout',[AuthController::class, 'logout']); });
+
+Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
+
+Route::get('/students', [StudentController::class, 'index']);
+Route::get('/students/create', [StudentController::class, 'create']);
+Route::post('/students', [StudentController::class, 'store']);
+Route::get('/students/{student}/edit', [StudentController::class, 'edit']);
+Route::put('/students/{student}', [StudentController::class, 'update']);
+Route::delete('/students/{student}', [StudentController::class, 'destroy']);
