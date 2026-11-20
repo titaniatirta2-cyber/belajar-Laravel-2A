@@ -18,7 +18,17 @@ class AuthController extends Controller
         // Pakai first() agar kalau tidak ketemu tidak langsung 404
         $data = User::where('email', $request->email)->first();
 
-        if ($data && Hash::check($request->password, $data->password)) {
+        $passwordValid = false;
+
+        if ($data) {
+            if (str_starts_with($data->password, '$2y$') || str_starts_with($data->password, '$2a$')) {
+                $passwordValid = Hash::check($request->password, $data->password);
+            } else {
+                $passwordValid = hash_equals((string) $data->password, (string) $request->password);
+            }
+        }
+
+        if ($data && $passwordValid) {
             session([
                 'email' => $data->email,
                 'nama' => $data->nama,

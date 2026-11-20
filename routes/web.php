@@ -70,6 +70,8 @@ Route::get('/login', function () {
 
 Route::post('/login',[AuthController::class, 'cek']);
 
-Route::get('/dashboard', function () {
-    return view('dashboard'); // atau arahkan ke DashboardController kamu
-});
+// Route::get('/dashboard', function () {
+//     return view('dashboard'); // atau arahkan ke DashboardController kamu
+// });
+
+Route::get('/dashboard', [DashboardController::class, 'adminDashboard']);

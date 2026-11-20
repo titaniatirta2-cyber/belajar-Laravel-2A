@@ -41,6 +41,21 @@
     <center>
         <form method="POST" action="/login">
             @csrf
+
+            @if ($errors->any())
+                <div style="color: red; margin-bottom: 10px;">
+                    @foreach ($errors->all() as $error)
+                        <div>{{ $error }}</div>
+                    @endforeach
+                </div>
+            @endif
+
+            @if (session('error'))
+                <div style="color: red; margin-bottom: 10px;">
+                    {{ session('error') }}
+                </div>
+            @endif
+
             <div class="form-login">
                 <p><input type="text" class="input" name="email" placeholder="Masukan Email"></p>
                 <p><input type="password" class="input" name="password" placeholder="Password Anda"></p>
