@@ -1,52 +1,166 @@
 :root {
     --bg: #eef1ea;
     --utama: #87a082;
+    --utama-hover: #738d6e;
     --judul: #5f7a5a;
-    --teks-header: #fff;
+    --teks-utama: #333333;
+    --teks-muted: #555555;
+    --teks-header: #ffffff;
+    --permukaan: #ffffff;
     --baris: #f4f7f1;
     --garis: #d3dccf;
+    --bayangan: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
 }
 
 body {
-    font-family: Arial, sans-serif;
-    background: var(--bg);
-    display: flex;
-    justify-content: center;
-    padding: 40px;
+    margin: 0;
+    font-family: 'Segoe UI', Arial, sans-serif;
+    font-size: 15px;
+    line-height: 1.6;
+    color: var(--teks-utama);
+    background-color: var(--bg);
 }
 
+/* Wrapper utama untuk layout templating (master / dashboard) */
+.template-wrapper {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+.template-header {
+    background-color: var(--permukaan);
+    border-bottom: 1px solid var(--garis);
+    padding: 16px 32px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+}
+
+.template-brand {
+    margin: 0;
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--judul);
+}
+
+.template-nav {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+}
+
+.template-nav a {
+    text-decoration: none;
+    color: var(--teks-utama);
+    padding: 6px 12px;
+    border-radius: 6px;
+    transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.template-nav a:hover,
+.template-nav a.active {
+    background-color: var(--utama);
+    color: var(--teks-header);
+}
+
+/* Area konten dinamis (@yield('content')) */
+.template-content {
+    flex: 1;
+    width: 100%;
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 32px 20px;
+}
+
+/* Komponen card / box konten */
 .box {
-    background: #fff;
+    background-color: var(--permukaan);
     padding: 24px 32px;
     border-radius: 10px;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, .1);
+    border: 1px solid var(--garis);
+    box-shadow: var(--bayangan);
+    margin-bottom: 24px;
 }
 
-h2 {
+.box h2,
+h2.page-title {
+    margin-top: 0;
+    margin-bottom: 16px;
     text-align: center;
     color: var(--judul);
 }
 
+.box p,
 p {
-    color: #444;
+    color: var(--teks-muted);
+    margin-top: 0;
+    margin-bottom: 14px;
+}
+
+/* Tabel responsif & rapi */
+.table-responsive {
+    width: 100%;
+    overflow-x: auto;
 }
 
 table {
     border-collapse: collapse;
     width: 100%;
+    background-color: var(--permukaan);
 }
 
-th, td {
+th,
+td {
     border: 1px solid var(--garis);
-    padding: 8px 16px;
+    padding: 10px 16px;
     text-align: left;
+    vertical-align: middle;
 }
 
 th {
-    background: var(--utama);
+    background-color: var(--utama);
     color: var(--teks-header);
+    font-weight: 600;
 }
 
-tr:nth-child(even) {
-    background: var(--baris);
+tbody tr:nth-child(even) {
+    background-color: var(--baris);
+}
+
+tbody tr:hover {
+    background-color: #e6ede2;
+}
+
+.template-footer {
+    text-align: center;
+    padding: 16px 24px;
+    font-size: 13px;
+    color: var(--teks-muted);
+    border-top: 1px solid var(--garis);
+    background-color: var(--permukaan);
+}
+
+@media (max-width: 640px) {
+    .template-header {
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 16px 20px;
+    }
+
+    .box {
+        padding: 18px 20px;
+    }
+
+    th,
+    td {
+        padding: 8px 10px;
+    }
 }
